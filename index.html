@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyScope — Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- TOP NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar-left">
+                <div class="logo-small">🌤️ SkyScope</div>
+            </div>
+            <div class="navbar-center">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input class="search-input" id="cityInput" type="text" placeholder="Search for your preferred city…"
+                        onkeydown="if(event.key==='Enter') searchWeather()" />
+                </div>
+            </div>
+            <div class="navbar-right">
+                <button class="btn-location" onclick="getByLocation()" title="Use my location">
+                    📍 Current Location
+                </button>
+                <div class="unit-toggle-menu">
+                    <button class="unit-btn" id="btnC" onclick="switchUnit('metric')">°C</button>
+                    <button class="unit-btn active" id="btnF" onclick="switchUnit('imperial')">°F</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MESSAGE BOXES -->
+        <div class="message-box error" id="errorBox">
+            <span class="icon">⚠️</span>
+            <span id="errorText"></span>
+        </div>
+        <div class="message-box info" id="infoBox">
+            <span class="icon">ℹ️</span>
+            <span id="infoText"></span>
+        </div>
+
+        <!-- LOADING -->
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">Fetching weather data…</div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="weather-main" id="weatherMain">
+            <div class="main-container">
+                <!-- LEFT SECTION: TIME & FORECAST -->
+                <div class="left-section">
+                    <!-- TIME & DATE CARD -->
+                    <div class="time-card">
+                        <div class="time-display" id="timeDisplay">--:--</div>
+                        <div class="date-display" id="dateDisplay">—</div>
+                    </div>
+
+                    <!-- 5-DAY FORECAST -->
+                    <div class="forecast-card">
+                        <div class="forecast-header">5 Days Forecast:</div>
+                        <div class="forecast-list" id="forecastList">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CENTER SECTION: CURRENT WEATHER -->
+                <div class="center-section">
+                    <div class="weather-card">
+                        <div class="weather-top">
+                            <div class="temp-display-section">
+                                <div class="temperature-big" id="tempBig">—°</div>
+                                <div class="feels-like" id="feelsLike">—</div>
+                            </div>
+                            <div class="weather-icon-wrap">
+                                <img id="weatherIcon" src="" alt="Weather icon" />
+                            </div>
+                        </div>
+                        <div class="weather-desc-text" id="weatherDesc">—</div>
+                        <div class="location-info">
+                            <span id="cityName">—</span><span id="cityCountry"></span>
+                        </div>
+                    </div>
+
+                    <!-- SUN TIMES -->
+                    <div class="sun-times-card">
+                        <div class="sun-item">
+                            <div class="sun-icon">🌅</div>
+                            <div class="sun-time" id="sunrise">—</div>
+                            <div class="sun-label">Sunrise</div>
+                        </div>
+                        <div class="sun-divider"></div>
+                        <div class="sun-item">
+                            <div class="sun-icon">🌇</div>
+                            <div class="sun-time" id="sunset">—</div>
+                            <div class="sun-label">Sunset</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SECTION: STATS -->
+                <div class="right-section">
+                    <div class="stats-group">
+                        <div class="stat-item" style="--index: 0;">
+                            <div class="stat-label">Humidity</div>
+                            <div class="stat-value" id="humidity">—</div>
+                        </div>
+                        <div class="stat-item" style="--index: 1;">
+                            <div class="stat-label">Wind Speed</div>
+                            <div class="stat-value" id="windSpeed">—</div>
+                        </div>
+                        <div class="stat-item" style="--index: 2;">
+                            <div class="stat-label">Pressure</div>
+                            <div class="stat-value" id="pressure">—</div>
+                        </div>
+                        <div class="stat-item" style="--index: 3;">
+                            <div class="stat-label">Visibility</div>
+                            <div class="stat-value" id="visibility">—</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
